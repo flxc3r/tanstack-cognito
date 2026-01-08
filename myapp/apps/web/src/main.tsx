@@ -1,8 +1,10 @@
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import ReactDOM from "react-dom/client";
+import { AuthProvider } from "react-oidc-context";
 
 import Loader from "./components/loader";
 import { routeTree } from "./routeTree.gen";
+import { cognitoAuthConfig } from "./config/cognitoAuthConfig";
 
 const router = createRouter({
   routeTree,
@@ -25,5 +27,9 @@ if (!rootElement) {
 
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
-  root.render(<RouterProvider router={router} />);
+  root.render(
+    <AuthProvider {...cognitoAuthConfig}>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }
