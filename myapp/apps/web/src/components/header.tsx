@@ -3,6 +3,7 @@ import { useAuth } from "react-oidc-context";
 
 import { ModeToggle } from "./mode-toggle";
 import { Button } from "./ui/button";
+import { signOut } from "@/lib/auth/auth";
 
 export default function Header() {
   const auth = useAuth();
@@ -32,10 +33,15 @@ export default function Header() {
               <Button
                 size={"xs"}
                 variant={"destructive"}
-                onClick={() => auth.removeUser()} // is this the best way to do it ???
+                onClick={() => signOut(auth)}
               >
                 Sign out
               </Button>
+              {auth.user.expired && (
+                <span className="rounded-sm bg-orange-500 text-sm p-1">
+                  Expired
+                </span>
+              )}
             </>
           ) : (
             <Button

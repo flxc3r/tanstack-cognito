@@ -60,7 +60,7 @@ function RouteComponent() {
 
               <div>
                 <pre>Profile</pre>
-                <pre className="bg-gray-800">
+                <pre className="bg-teal-500 rounded-md p-1">
                   {JSON.stringify(auth.user.profile, null, 2)}
                 </pre>
               </div>
